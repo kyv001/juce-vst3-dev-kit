@@ -251,7 +251,7 @@ set_source_files_properties ("${JUCE_HEADER_PATH}/JuceHeader.h" PROPERTIES HEADE
 foreach (ITEM ${JUCE_PUBLIC_INC_PATH})
 	file (RELATIVE_PATH ITEM_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${ITEM})
 	target_include_directories (libJUCE PUBLIC
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${ITEM_PATH}>"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${ITEM_PATH}"
     )
 endforeach (ITEM ${JUCE_PUBLIC_INC_PATH})
 foreach (ITEM ${JUCE_PRIVATE_INC_PATH})
