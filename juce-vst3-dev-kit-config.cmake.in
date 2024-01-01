@@ -1,0 +1,3 @@
+﻿@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/juce-vst3-dev-kit-targets.cmake")
