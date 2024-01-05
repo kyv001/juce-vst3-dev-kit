@@ -435,6 +435,10 @@ if (NOT MSVC)
 		)
 	endif ()
 else (NOT MSVC)
+	target_link_options (juce PUBLIC
+		/INCLUDE:GetPluginFactory
+	)
+
 	if (CMAKE_BUILD_TYPE STREQUAL Debug)
 		target_compile_options (juce PRIVATE
 			/permissive-#符合模式:是
