@@ -245,18 +245,18 @@ set (JUCE_PRIVATE_INC_PATH
 # Target
 # ============================
 file (GLOB_RECURSE JUCE_SRC "${JUCE_HEADER_PATH}/*.cpp" "${JUCE_HEADER_PATH}/*.h")
-add_library (libJUCE STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX} ${DMDA_SRC})
+add_library (juce STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX} ${DMDA_SRC})
 set_source_files_properties ("${JUCE_HEADER_PATH}/JuceHeader.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 
 foreach (ITEM ${JUCE_PUBLIC_INC_PATH})
 	file (RELATIVE_PATH ITEM_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${ITEM})
-	target_include_directories (libJUCE PUBLIC
+	target_include_directories (juce PUBLIC
         "${CMAKE_CURRENT_SOURCE_DIR}/${ITEM_PATH}"
     )
 endforeach (ITEM ${JUCE_PUBLIC_INC_PATH})
 foreach (ITEM ${JUCE_PRIVATE_INC_PATH})
 	file (RELATIVE_PATH ITEM_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${ITEM})
-	target_include_directories (libJUCE PRIVATE ${ITEM_PATH})
+	target_include_directories (juce PRIVATE ${ITEM_PATH})
 endforeach (ITEM ${JUCE_PRIVATE_INC_PATH})
 
 # ============================
@@ -344,29 +344,29 @@ set (JUCE_PLUGIN_DEF
 )
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
-	target_compile_definitions (libJUCE PUBLIC ${JUCE_DEBUG_DEF})
+	target_compile_definitions (juce PUBLIC ${JUCE_DEBUG_DEF})
 else (CMAKE_BUILD_TYPE STREQUAL Debug)
-	target_compile_definitions (libJUCE PUBLIC ${JUCE_NDEBUG_DEF})
+	target_compile_definitions (juce PUBLIC ${JUCE_NDEBUG_DEF})
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 if (WIN32)
-	target_compile_definitions (libJUCE PUBLIC ${JUCE_WIN_DEF})
+	target_compile_definitions (juce PUBLIC ${JUCE_WIN_DEF})
 elseif (UNIX AND NOT APPLE)
-	target_compile_definitions (libJUCE PUBLIC ${JUCE_LINUX_DEF})
+	target_compile_definitions (juce PUBLIC ${JUCE_LINUX_DEF})
 elseif (APPLE)
-	target_compile_definitions (libJUCE PUBLIC ${JUCE_OSX_DEF})
+	target_compile_definitions (juce PUBLIC ${JUCE_OSX_DEF})
 endif ()
 
-target_compile_definitions (libJUCE PUBLIC ${JUCE_MODULE_DEF} ${JUCE_PLUGIN_DEF} ${DMDA_DEF})
+target_compile_definitions (juce PUBLIC ${JUCE_MODULE_DEF} ${JUCE_PLUGIN_DEF} ${DMDA_DEF})
 
 if (GNU OR MINGW)
-	target_compile_definitions (libJUCE PUBLIC "JUCE_USE_DIRECTWRITE=0")
+	target_compile_definitions (juce PUBLIC "JUCE_USE_DIRECTWRITE=0")
 endif (GNU OR MINGW)
 
-target_compile_definitions (libJUCE PUBLIC "JUCE_MODAL_LOOPS_PERMITTED=1" "JUCE_CATCH_UNHANDLED_EXCEPTIONS=1")
+target_compile_definitions (juce PUBLIC "JUCE_MODAL_LOOPS_PERMITTED=1" "JUCE_CATCH_UNHANDLED_EXCEPTIONS=1")
 
 if (JUCE_DISABLE_LEAK_DETECTOR)
-	target_compile_definitions (libJUCE PUBLIC "JUCE_CHECK_MEMORY_LEAKS=0")
+	target_compile_definitions (juce PUBLIC "JUCE_CHECK_MEMORY_LEAKS=0")
 endif (JUCE_DISABLE_LEAK_DETECTOR)
 
 
@@ -374,39 +374,38 @@ endif (JUCE_DISABLE_LEAK_DETECTOR)
 # Compile Options
 # ============================
 if (NOT MSVC)
-	target_compile_options (libJUCE PRIVATE
+	target_compile_options (juce PRIVATE
 			-pthread
 			-fPIC
 			-fvisibility=hidden
+			-fvisibility-inlines-hidden
 			"-Wa,-mbig-obj"
+	)
+	target_link_options (juce PRIVATE
+			-shared
+			-fvisibility=hidden
+			-fvisibility-inlines-hidden
 	)
 
 	if (WIN32)
-		target_link_libraries (libJUCE PRIVATE
+		target_link_libraries (juce PRIVATE
 			-m64
 			-s
-			-lgdi32
-			-luser32
-			-lkernel32
 			-lcomctl32
 			-lwinmm
-			-luuid
 			-lwsock32
 			-lwininet
 			-lversion
-			-lole32
 			-lws2_32
 			-loleaut32
 			-limm32
-			-lcomdlg32
 			-lshlwapi
 			-lrpcrt4
 			-lopengl32
+			-ldxgi
 		)
 	elseif (UNIX AND NOT APPLE)
-		target_link_libraries (libJUCE PRIVATE
-			-shared
-			-fvisibility=hidden
+		target_link_libraries (juce PRIVATE
 			${RT}
 			${DL}
 			${PTHREAD}
@@ -416,7 +415,7 @@ if (NOT MSVC)
 			${LIBCURL_LIBRARIES}
 		)
 	elseif (APPLE)
-		target_link_libraries (libJUCE PRIVATE
+		target_link_libraries (juce PRIVATE
 			"-framework Accelerate"
 			"-framework AudioToolbox"
 			"-framework AVFoundation"
@@ -436,8 +435,12 @@ if (NOT MSVC)
 		)
 	endif ()
 else (NOT MSVC)
+	target_link_options (juce PUBLIC
+		/INCLUDE:GetPluginFactory
+	)
+
 	if (CMAKE_BUILD_TYPE STREQUAL Debug)
-		target_compile_options (libJUCE PRIVATE
+		target_compile_options (juce PRIVATE
 			/permissive-#符合模式:是
 			/GS#安全检查:启用安全检查
 			/Zc:wchar_t#将WChar_t视为内置类型:是
@@ -449,7 +452,7 @@ else (NOT MSVC)
 			/nologo#取消显示启动版权标志:是
 			/bigobj#较大生成对象:是
 		)
-		target_link_options (libJUCE PRIVATE
+		target_link_options (juce PRIVATE
 			/MANIFEST#生成清单:是
 			/NXCOMPAT#数据执行保护(DEP):是
 			/DYNAMICBASE#随机基址:是
@@ -459,7 +462,7 @@ else (NOT MSVC)
 			/NOLOGO#取消显示启动版权标志:是
 		)
 	else (CMAKE_BUILD_TYPE STREQUAL Debug)
-		target_compile_options (libJUCE PRIVATE
+		target_compile_options (juce PRIVATE
 			/permissive-#符合模式:是
 			/GS#安全检查:启用安全检查
 			/GL#全程序优化:是
@@ -474,7 +477,7 @@ else (NOT MSVC)
 			/nologo#取消显示启动版权标志:是
 			/bigobj#较大生成对象:是
 		)
-		target_link_options (libJUCE PRIVATE
+		target_link_options (juce PRIVATE
 			/MANIFEST#生成清单:是
 			/LTCG:incremental#链接时间代码生成:使用快速链接时间代码生成
 			/NXCOMPAT#数据执行保护(DEP):是
