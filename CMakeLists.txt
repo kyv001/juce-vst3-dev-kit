@@ -262,7 +262,7 @@ endforeach (ITEM ${JUCE_PRIVATE_INC_PATH})
 # ============================
 # Definitions
 # ============================
-set (JUCE_DEBUG_DEF "DEBUG=1" "_DEBUG=1")
+set (JUCE_DEBUG_DEF "$<$<CONFIG:Debug>:DEBUG=1>" "$<$<CONFIG:Debug>:_DEBUG=1>" "$<$<NOT:$<CONFIG:Debug>>:NDEBUG=1>")
 set (JUCE_NDEBUG_DEF "NDEBUG=1")
 set (JUCE_LINUX_DEF "LINUX=1")
 set (JUCE_WIN_DEF "")
@@ -343,11 +343,7 @@ set (JUCE_PLUGIN_DEF
 	"JucePlugin_PreferredChannelConfigurations=${JucePlugin_PreferredChannelConfigurations}"
 )
 
-if (CMAKE_BUILD_TYPE STREQUAL Debug)
-	target_compile_definitions (juce PUBLIC ${JUCE_DEBUG_DEF})
-else (CMAKE_BUILD_TYPE STREQUAL Debug)
-	target_compile_definitions (juce PUBLIC ${JUCE_NDEBUG_DEF})
-endif (CMAKE_BUILD_TYPE STREQUAL Debug)
+target_compile_definitions (juce PUBLIC ${JUCE_DEBUG_DEF})
 
 if (WIN32)
 	target_compile_definitions (juce PUBLIC ${JUCE_WIN_DEF})
