@@ -241,7 +241,6 @@ set (JUCE_PRIVATE_INC_PATH
 # Target
 # ============================
 set (JUCE_AUDIO_SRC
-		"${JUCE_HEADER_PATH}/JuceHeader.h"
 		"${JUCE_HEADER_PATH}/include_juce_audio_basics.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_audio_devices.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_audio_formats.cpp"
@@ -249,7 +248,6 @@ set (JUCE_AUDIO_SRC
 		"${JUCE_HEADER_PATH}/include_juce_audio_utils.cpp"
 )
 set (JUCE_CORE_SRC
-		"${JUCE_HEADER_PATH}/JuceHeader.h"
 		"${JUCE_HEADER_PATH}/include_juce_core.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_cryptography.cpp"
@@ -268,11 +266,9 @@ set (JUCE_CORE_SRC
 		"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
 )
 set (JUCE_DSP_SRC
-		"${JUCE_HEADER_PATH}/JuceHeader.h"
 		"${JUCE_HEADER_PATH}/include_juce_dsp.cpp"
 )
 set (JUCE_VST3_SRC
-		"${JUCE_HEADER_PATH}/JuceHeader.h"
 		"${JUCE_HEADER_PATH}/include_juce_audio_plugin_client_VST3.cpp"
 )
 
