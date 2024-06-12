@@ -271,9 +271,13 @@ set (JUCE_DSP_SRC
 		"${JUCE_HEADER_PATH}/JuceHeader.h"
 		"${JUCE_HEADER_PATH}/include_juce_dsp.cpp"
 )
+set (JUCE_VST3_SRC
+		"${JUCE_HEADER_PATH}/JuceHeader.h"
+		"${JUCE_HEADER_PATH}/include_juce_audio_plugin_client_VST3.cpp"
+)
 
 set (JUCE_SRC
-	${JUCE_AUDIO_SRC} ${JUCE_CORE_SRC} ${JUCE_DSP_SRC}
+	${JUCE_AUDIO_SRC} ${JUCE_CORE_SRC} ${JUCE_DSP_SRC} ${JUCE_VST3_SRC}
 	"${JUCE_HEADER_PATH}/JuceHeader.h")
 add_library (juce STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX} ${DMDA_SRC})
 set_source_files_properties ("${JUCE_HEADER_PATH}/JuceHeader.h" PROPERTIES HEADER_FILE_ONLY TRUE)
