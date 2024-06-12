@@ -140,85 +140,81 @@ endif (NOT DEFINED JUCE_USE_LAME_AUDIO_FORMAT)
 # ============================
 set (JUCE_INC_PATH "${JUCE_PATH}/modules")
 if (UNIX AND NOT APPLE)
-    find_package (PkgConfig REQUIRED)
-    pkg_search_module (ALSA REQUIRED alsa)
-    pkg_search_module (FREETYPE2 REQUIRED freetype2)
-    pkg_search_module (LIBCURL REQUIRED libcurl)
-    pkg_search_module (WEBKIT2GTK-4.0 REQUIRED webkit2gtk-4.0)
-    pkg_search_module (GTK+-X11-3.0 REQUIRED gtk+-x11-3.0)
+	find_package (PkgConfig REQUIRED)
+	pkg_search_module (ALSA REQUIRED alsa)
+	pkg_search_module (FREETYPE2 REQUIRED freetype2)
+	pkg_search_module (LIBCURL REQUIRED libcurl)
+	pkg_search_module (WEBKIT2GTK-4.0 REQUIRED webkit2gtk-4.0)
+	pkg_search_module (GTK+-X11-3.0 REQUIRED gtk+-x11-3.0)
 
-    set (JUCE_INC_LIST
-        ${ALSA_INCLUDE_DIRS}
-        ${FREETYPE2_INCLUDE_DIRS}
-        ${LIBCURL_INCLUDE_DIRS}
-        ${WEBKIT2GTK-4.0_INCLUDE_DIRS}
-        ${GTK+-X11-3.0_INCLUDE_DIRS}
-    )
+	set (JUCE_INC_LIST
+		${ALSA_INCLUDE_DIRS}
+		${FREETYPE2_INCLUDE_DIRS}
+		${LIBCURL_INCLUDE_DIRS}
+		${WEBKIT2GTK-4.0_INCLUDE_DIRS}
+		${GTK+-X11-3.0_INCLUDE_DIRS}
+	)
 
-    find_library (RT rt)
-    find_library (DL dl)
-    find_library (PTHREAD pthread)
-    find_library (GL GL)
+	find_library (RT rt)
+	find_library (DL dl)
+	find_library (PTHREAD pthread)
+	find_library (GL GL)
 endif (UNIX AND NOT APPLE)
 
 if (JUCE_ASIO)
-    if (DEFINED ASIO_SDK_PATH)
-        set (JUCE_ASIO_INC_PATH ${ASIO_SDK_PATH})
-    else (DEFINED ASIO_SDK_PATH)
-        message (SEND_ERROR "ASIO SDK notfound!")
-    endif (DEFINED ASIO_SDK_PATH)
+	if (DEFINED ASIO_SDK_PATH)
+		set (JUCE_ASIO_INC_PATH ${ASIO_SDK_PATH})
+	else (DEFINED ASIO_SDK_PATH)
+		message (SEND_ERROR "ASIO SDK notfound!")
+	endif (DEFINED ASIO_SDK_PATH)
 endif (JUCE_ASIO)
 if (JucePlugin_Build_VST OR ((JUCE_PLUGINHOST_VST3 OR JucePlugin_Build_VST3) AND JUCE_VST3_CAN_REPLACE_VST2))
-    if (DEFINED VST2_SDK_PATH)
-        set (JUCE_VST_INC_PATH ${VST2_SDK_PATH})
-    else (DEFINED VST2_SDK_PATH)
-        message (SEND_ERROR "VST SDK notfound!")
-    endif (DEFINED VST2_SDK_PATH)
+	if (DEFINED VST2_SDK_PATH)
+		set (JUCE_VST_INC_PATH ${VST2_SDK_PATH})
+	else (DEFINED VST2_SDK_PATH)
+		message (SEND_ERROR "VST SDK notfound!")
+	endif (DEFINED VST2_SDK_PATH)
 endif (JucePlugin_Build_VST OR ((JUCE_PLUGINHOST_VST3 OR JucePlugin_Build_VST3) AND JUCE_VST3_CAN_REPLACE_VST2))
 if (JucePlugin_Build_VST3 AND JUCE_CUSTOM_VST3_SDK)
-    if (DEFINED VST3_SDK_PATH)
-        set (JUCE_VST3_INC_PATH ${VST3_SDK_PATH})
-    else (DEFINED VST3_SDK_PATH)
-        message (SEND_ERROR "VST3 SDK notfound!")
-    endif (DEFINED VST3_SDK_PATH)
+	if (DEFINED VST3_SDK_PATH)
+		set (JUCE_VST3_INC_PATH ${VST3_SDK_PATH})
+	else (DEFINED VST3_SDK_PATH)
+		message (SEND_ERROR "VST3 SDK notfound!")
+	endif (DEFINED VST3_SDK_PATH)
 endif (JucePlugin_Build_VST3 AND JUCE_CUSTOM_VST3_SDK)
 if (JucePlugin_Build_LV2)
-    if (DEFINED LV2_SDK_PATH)
-        set (JUCE_LV2_INC_PATH ${LV2_SDK_PATH})
-    else (DEFINED LV2_SDK_PATH)
-        #LV2 SDK Path
-        set (JUCE_LV2_INC_PATH
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord"
-            "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom"
-        )
-    endif (DEFINED LV2_SDK_PATH)
+	#LV2 SDK Path
+	set (JUCE_LV2_INC_PATH
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord"
+		"${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom"
+		)
 
-    #LV2 SDK Src
-    set (JUCE_LV2_SRC_FIX
-        "${CMAKE_CURRENT_SOURCE_DIR}/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp"
-    )
+	#LV2 SDK Src
+	set (JUCE_LV2_SRC_FIX
+		"${JUCE_HEADER_PATH}/include_juce_audio_processors_lv2_libs.cpp"
+	)
 endif (JucePlugin_Build_LV2)
 if (JucePlugin_Enable_ARA)
-    if (DEFINED ARA_SDK_PATH)
-        set (JUCE_ARA_INC_PATH ${ARA_SDK_PATH})
-    else (DEFINED ARA_SDK_PATH)
-        message (SEND_ERROR "ARA SDK notfound!")
-    endif (DEFINED ARA_SDK_PATH)
+	if (DEFINED ARA_SDK_PATH)
+		set (JUCE_ARA_INC_PATH ${ARA_SDK_PATH})
+	else (DEFINED ARA_SDK_PATH)
+		message (SEND_ERROR "ARA SDK notfound!")
+	endif (DEFINED ARA_SDK_PATH)
 
-    #ARA SDK Src
-    if (JucePlugin_Enable_ARA)
-    set (JUCE_ARA_SRC_FIX
-        "${ARA_SDK_PATH}/ARA_Library/PlugIn/ARAPlug.cpp"
-        "${ARA_SDK_PATH}/ARA_Library/Debug/ARADebug.c"
-        "${ARA_SDK_PATH}/ARA_Library/Dispatch/ARAPlugInDispatch.cpp"
-        "${ARA_SDK_PATH}/ARA_Library/Utilities/ARAChannelFormat.cpp"
-    )
-    endif (JucePlugin_Enable_ARA)
+	#ARA SDK Src
+	if (JucePlugin_Enable_ARA)
+	set (JUCE_ARA_SRC_FIX
+		"${ARA_SDK_PATH}/ARA_Library/PlugIn/ARAPlug.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_audio_processors_ara.cpp"
+		"${ARA_SDK_PATH}/ARA_Library/Dispatch/ARAPlugInDispatch.cpp"
+		"${ARA_SDK_PATH}/ARA_Library/Utilities/ARAChannelFormat.cpp"
+	)
+	endif (JucePlugin_Enable_ARA)
 endif (JucePlugin_Enable_ARA)
 
 if (DMDA_ENABLED)
@@ -244,15 +240,49 @@ set (JUCE_PRIVATE_INC_PATH
 # ============================
 # Target
 # ============================
-file (GLOB_RECURSE JUCE_SRC "${JUCE_HEADER_PATH}/*.cpp" "${JUCE_HEADER_PATH}/*.h")
+set (JUCE_AUDIO_SRC
+		"${JUCE_HEADER_PATH}/JuceHeader.h"
+		"${JUCE_HEADER_PATH}/include_juce_audio_basics.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_audio_devices.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_audio_formats.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_audio_processors.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_audio_utils.cpp"
+)
+set (JUCE_CORE_SRC
+		"${JUCE_HEADER_PATH}/JuceHeader.h"
+		"${JUCE_HEADER_PATH}/include_juce_core.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_cryptography.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_gui_basics.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_gui_extra.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_events.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_data_structures.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_graphics.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_graphics_Harfbuzz.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_osc.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_box2d.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_opengl.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_analytics.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_product_unlocking.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_video.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
+)
+set (JUCE_DSP_SRC
+		"${JUCE_HEADER_PATH}/JuceHeader.h"
+		"${JUCE_HEADER_PATH}/include_juce_dsp.cpp"
+)
+
+set (JUCE_SRC
+	${JUCE_AUDIO_SRC} ${JUCE_CORE_SRC} ${JUCE_DSP_SRC}
+	"${JUCE_HEADER_PATH}/JuceHeader.h")
 add_library (juce STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX} ${DMDA_SRC})
 set_source_files_properties ("${JUCE_HEADER_PATH}/JuceHeader.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 
 foreach (ITEM ${JUCE_PUBLIC_INC_PATH})
 	file (RELATIVE_PATH ITEM_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${ITEM})
 	target_include_directories (juce PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/${ITEM_PATH}"
-    )
+		"${CMAKE_CURRENT_SOURCE_DIR}/${ITEM_PATH}"
+	)
 endforeach (ITEM ${JUCE_PUBLIC_INC_PATH})
 foreach (ITEM ${JUCE_PRIVATE_INC_PATH})
 	file (RELATIVE_PATH ITEM_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${ITEM})
@@ -269,52 +299,52 @@ set (JUCE_WIN_DEF "")
 set (JUCE_OSX_DEF "")
 
 set (JUCE_MODULE_DEF 
-    "JUCE_DISPLAY_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_DISPLAY_SPLASH_SCREEN}>,1,0>"
-    "JUCE_USE_DARK_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_USE_DARK_SPLASH_SCREEN}>,1,0>"
-    "JUCE_MODULE_AVAILABLE_juce_analytics=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_basics=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_devices=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_formats=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_processors=1"
-    "JUCE_MODULE_AVAILABLE_juce_audio_utils=1"
-    "JUCE_MODULE_AVAILABLE_juce_box2d=1"
-    "JUCE_MODULE_AVAILABLE_juce_core=1"
-    "JUCE_MODULE_AVAILABLE_juce_cryptography=1"
-    "JUCE_MODULE_AVAILABLE_juce_data_structures=1"
-    "JUCE_MODULE_AVAILABLE_juce_dsp=1"
-    "JUCE_MODULE_AVAILABLE_juce_events=1"
-    "JUCE_MODULE_AVAILABLE_juce_graphics=1"
-    "JUCE_MODULE_AVAILABLE_juce_gui_basics=1"
-    "JUCE_MODULE_AVAILABLE_juce_gui_extra=1"
-    "JUCE_MODULE_AVAILABLE_juce_opengl=1"
-    "JUCE_MODULE_AVAILABLE_juce_osc=1"
-    "JUCE_MODULE_AVAILABLE_juce_product_unlocking=1"
-    "JUCE_MODULE_AVAILABLE_juce_video=1"
-    "JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1"
-    "JUCE_STRICT_REFCOUNTEDPOINTER=1"
-    "JUCE_STANDALONE_APPLICATION=0"
-    "JucePlugin_Build_VST=$<IF:$<BOOL:${JucePlugin_Build_VST}>,1,0>"
-    "JucePlugin_Build_VST3=$<IF:$<BOOL:${JucePlugin_Build_VST3}>,1,0>"
-    "JucePlugin_Build_AU=$<IF:$<BOOL:${JucePlugin_Build_AU}>,1,0>"
-    "JucePlugin_Build_AUv3=$<IF:$<BOOL:${JucePlugin_Build_AUv3}>,1,0>"
-    "JucePlugin_Build_LV2=$<IF:$<BOOL:${JucePlugin_Build_LV2}>,1,0>"
-    "JucePlugin_Build_RTAS=$<IF:$<BOOL:${JucePlugin_Build_RTAS}>,1,0>"
-    "JucePlugin_Build_AAX=$<IF:$<BOOL:${JucePlugin_Build_AAX}>,1,0>"
-    "JucePlugin_Build_Standalone=$<IF:$<BOOL:${JucePlugin_Build_Standalone}>,1,0>"
-    "JucePlugin_Build_Unity=$<IF:$<BOOL:${JucePlugin_Build_Unity}>,1,0>"
-    "JUCE_USE_WINRT_MIDI=$<IF:$<BOOL:${JUCE_USE_WINRT_MIDI}>,1,0>"
-    "JUCE_ASIO=$<IF:$<BOOL:${JUCE_ASIO}>,1,0>"
-    "JUCE_JACK=$<IF:$<BOOL:${JUCE_JACK}>,1,0>"
-    "JUCE_BELA=$<IF:$<BOOL:${JUCE_BELA}>,1,0>"
-    "JUCE_USE_ANDROID_OPENSLES=$<IF:$<BOOL:${JUCE_USE_ANDROID_OPENSLES}>,1,0>"
-    "JUCE_ASIO_DEBUGGING=$<IF:$<BOOL:${JUCE_ASIO_DEBUGGING}>,1,0>"
-    "JUCE_WINRT_MIDI_LOGGING=$<IF:$<BOOL:${JUCE_WINRT_MIDI_LOGGING}>,1,0>"
-    "JUCE_CUSTOM_VST3_SDK=$<IF:$<BOOL:${JUCE_CUSTOM_VST3_SDK}>,1,0>"
-    "JUCE_VST3_CAN_REPLACE_VST2=$<IF:$<BOOL:${JUCE_VST3_CAN_REPLACE_VST2}>,1,0>"
-    "JUCE_USE_MP3AUDIOFORMAT=$<IF:$<BOOL:${JUCE_USE_MP3AUDIOFORMAT}>,1,0>"
-    "JUCE_USE_LAME_AUDIO_FORMAT=$<IF:$<BOOL:${JUCE_USE_LAME_AUDIO_FORMAT}>,1,0>"
-    "JucePlugin_Enable_ARA=$<IF:$<BOOL:${JucePlugin_Enable_ARA}>,1,0>"
+	"JUCE_DISPLAY_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_DISPLAY_SPLASH_SCREEN}>,1,0>"
+	"JUCE_USE_DARK_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_USE_DARK_SPLASH_SCREEN}>,1,0>"
+	"JUCE_MODULE_AVAILABLE_juce_analytics=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_basics=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_devices=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_formats=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_processors=1"
+	"JUCE_MODULE_AVAILABLE_juce_audio_utils=1"
+	"JUCE_MODULE_AVAILABLE_juce_box2d=1"
+	"JUCE_MODULE_AVAILABLE_juce_core=1"
+	"JUCE_MODULE_AVAILABLE_juce_cryptography=1"
+	"JUCE_MODULE_AVAILABLE_juce_data_structures=1"
+	"JUCE_MODULE_AVAILABLE_juce_dsp=1"
+	"JUCE_MODULE_AVAILABLE_juce_events=1"
+	"JUCE_MODULE_AVAILABLE_juce_graphics=1"
+	"JUCE_MODULE_AVAILABLE_juce_gui_basics=1"
+	"JUCE_MODULE_AVAILABLE_juce_gui_extra=1"
+	"JUCE_MODULE_AVAILABLE_juce_opengl=1"
+	"JUCE_MODULE_AVAILABLE_juce_osc=1"
+	"JUCE_MODULE_AVAILABLE_juce_product_unlocking=1"
+	"JUCE_MODULE_AVAILABLE_juce_video=1"
+	"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1"
+	"JUCE_STRICT_REFCOUNTEDPOINTER=1"
+	"JUCE_STANDALONE_APPLICATION=0"
+	"JucePlugin_Build_VST=$<IF:$<BOOL:${JucePlugin_Build_VST}>,1,0>"
+	"JucePlugin_Build_VST3=$<IF:$<BOOL:${JucePlugin_Build_VST3}>,1,0>"
+	"JucePlugin_Build_AU=$<IF:$<BOOL:${JucePlugin_Build_AU}>,1,0>"
+	"JucePlugin_Build_AUv3=$<IF:$<BOOL:${JucePlugin_Build_AUv3}>,1,0>"
+	"JucePlugin_Build_LV2=$<IF:$<BOOL:${JucePlugin_Build_LV2}>,1,0>"
+	"JucePlugin_Build_RTAS=$<IF:$<BOOL:${JucePlugin_Build_RTAS}>,1,0>"
+	"JucePlugin_Build_AAX=$<IF:$<BOOL:${JucePlugin_Build_AAX}>,1,0>"
+	"JucePlugin_Build_Standalone=$<IF:$<BOOL:${JucePlugin_Build_Standalone}>,1,0>"
+	"JucePlugin_Build_Unity=$<IF:$<BOOL:${JucePlugin_Build_Unity}>,1,0>"
+	"JUCE_USE_WINRT_MIDI=$<IF:$<BOOL:${JUCE_USE_WINRT_MIDI}>,1,0>"
+	"JUCE_ASIO=$<IF:$<BOOL:${JUCE_ASIO}>,1,0>"
+	"JUCE_JACK=$<IF:$<BOOL:${JUCE_JACK}>,1,0>"
+	"JUCE_BELA=$<IF:$<BOOL:${JUCE_BELA}>,1,0>"
+	"JUCE_USE_ANDROID_OPENSLES=$<IF:$<BOOL:${JUCE_USE_ANDROID_OPENSLES}>,1,0>"
+	"JUCE_ASIO_DEBUGGING=$<IF:$<BOOL:${JUCE_ASIO_DEBUGGING}>,1,0>"
+	"JUCE_WINRT_MIDI_LOGGING=$<IF:$<BOOL:${JUCE_WINRT_MIDI_LOGGING}>,1,0>"
+	"JUCE_CUSTOM_VST3_SDK=$<IF:$<BOOL:${JUCE_CUSTOM_VST3_SDK}>,1,0>"
+	"JUCE_VST3_CAN_REPLACE_VST2=$<IF:$<BOOL:${JUCE_VST3_CAN_REPLACE_VST2}>,1,0>"
+	"JUCE_USE_MP3AUDIOFORMAT=$<IF:$<BOOL:${JUCE_USE_MP3AUDIOFORMAT}>,1,0>"
+	"JUCE_USE_LAME_AUDIO_FORMAT=$<IF:$<BOOL:${JUCE_USE_LAME_AUDIO_FORMAT}>,1,0>"
+	"JucePlugin_Enable_ARA=$<IF:$<BOOL:${JucePlugin_Enable_ARA}>,1,0>"
 )
 
 set (JUCE_PLUGIN_DEF
@@ -441,7 +471,7 @@ else (NOT MSVC)
 			/GS#安全检查:启用安全检查
 			/Zc:wchar_t#将WChar_t视为内置类型:是
 			/Gm-#启用最小重新生成:否
-			/sdl#SDL检查:是
+			/sdl-#SDL检查:否
 			/fp:precise#浮点模型:精度
 			/Zc:forScope#强制For循环范围中的合规性:是
 			/Gd#调用约定:__cdecl
@@ -465,7 +495,7 @@ else (NOT MSVC)
 			/Gy#启用函数级链接:是
 			/Zc:wchar_t#将WChar_t视为内置类型:是
 			/Gm-#启用最小重新生成:否
-			/sdl#SDL检查:是
+			/sdl-#SDL检查:否
 			/fp:precise#浮点模型:精度
 			/Zc:forScope#强制For循环范围中的合规性:是
 			/Gd#调用约定:__cdecl
