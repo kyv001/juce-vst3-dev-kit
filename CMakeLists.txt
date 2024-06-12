@@ -324,6 +324,7 @@ set (JUCE_MODULE_DEF
 	"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1"
 	"JUCE_STRICT_REFCOUNTEDPOINTER=1"
 	"JUCE_STANDALONE_APPLICATION=0"
+	"DONT_SET_USING_JUCE_NAMESPACE=1"
 	"JucePlugin_Build_VST=$<IF:$<BOOL:${JucePlugin_Build_VST}>,1,0>"
 	"JucePlugin_Build_VST3=$<IF:$<BOOL:${JucePlugin_Build_VST3}>,1,0>"
 	"JucePlugin_Build_AU=$<IF:$<BOOL:${JucePlugin_Build_AU}>,1,0>"
