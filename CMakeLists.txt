@@ -25,6 +25,7 @@ set (JUCE_HEADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/JuceLibraryCode")
 set (VST2_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst2-sdk-for-vst3sdk")
 set (VST3_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst3sdk")
 set (DMDA_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libDMDA")
+set (ARA_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARA_SDK")
 
 # ============================
 # Options
@@ -40,7 +41,7 @@ set (JucePlugin_Build_RTAS OFF)
 set (JucePlugin_Build_AAX OFF)
 set (JucePlugin_Build_Standalone OFF)
 set (JucePlugin_Build_Unity OFF)
-set (JucePlugin_Enable_ARA OFF)
+set (JucePlugin_Enable_ARA ON)
 set (JUCE_USE_WINRT_MIDI OFF)
 set (JUCE_ASIO OFF)
 set (JUCE_JACK OFF)
@@ -249,21 +250,21 @@ set (JUCE_AUDIO_SRC
 )
 set (JUCE_CORE_SRC
 		"${JUCE_HEADER_PATH}/include_juce_core.cpp"
-		"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
+		#"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_cryptography.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_gui_basics.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_gui_extra.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_events.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_data_structures.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_graphics.cpp"
-		"${JUCE_HEADER_PATH}/include_juce_graphics_Harfbuzz.cpp"
+		#"${JUCE_HEADER_PATH}/include_juce_graphics_Harfbuzz.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_osc.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_box2d.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_opengl.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_analytics.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_product_unlocking.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_video.cpp"
-		"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
+		#"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
 )
 set (JUCE_DSP_SRC
 		"${JUCE_HEADER_PATH}/include_juce_dsp.cpp"
