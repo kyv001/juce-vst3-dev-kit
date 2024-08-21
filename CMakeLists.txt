@@ -41,7 +41,6 @@ set (JucePlugin_Build_RTAS OFF)
 set (JucePlugin_Build_AAX OFF)
 set (JucePlugin_Build_Standalone OFF)
 set (JucePlugin_Build_Unity OFF)
-set (JucePlugin_Enable_ARA ON)
 set (JUCE_USE_WINRT_MIDI OFF)
 set (JUCE_ASIO OFF)
 set (JUCE_JACK OFF)
@@ -87,6 +86,9 @@ endif (NOT DEFINED JucePlugin_Build_Standalone)
 if (NOT DEFINED JucePlugin_Build_Unity)
 	set (JucePlugin_Build_Unity OFF)
 endif (NOT DEFINED JucePlugin_Build_Unity)
+if (NOT DEFINED JucePlugin_Enable_ARA)
+	set (JucePlugin_Enable_ARA OFF)
+endif (NOT DEFINED JucePlugin_Enable_ARA)
 if (NOT DEFINED JUCE_USE_WINRT_MIDI)
 	set (JUCE_USE_WINRT_MIDI OFF)
 endif (NOT DEFINED JUCE_USE_WINRT_MIDI)
@@ -373,6 +375,11 @@ set (JUCE_PLUGIN_DEF
 	"JucePlugin_MaxNumInputChannels=${JucePlugin_MaxNumInputChannels}"
 	"JucePlugin_MaxNumOutputChannels=${JucePlugin_MaxNumOutputChannels}"
 	"JucePlugin_PreferredChannelConfigurations=${JucePlugin_PreferredChannelConfigurations}"
+	"JucePlugin_ARACompatibleArchiveIDs=\"${JucePlugin_ARACompatibleArchiveIDs}\""
+	"JucePlugin_ARAContentTypes=${JucePlugin_ARAContentTypes}"
+	"JucePlugin_ARATransformationFlags=${JucePlugin_ARATransformationFlags}"
+	"JucePlugin_ARAFactoryID=\"${JucePlugin_ARAFactoryID}\""
+	"JucePlugin_ARADocumentArchiveID=\"${JucePlugin_ARADocumentArchiveID}\""
 )
 
 target_compile_definitions (juce PUBLIC ${JUCE_DEBUG_DEF})
