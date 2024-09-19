@@ -26,6 +26,7 @@ set (VST2_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst2-sdk-for-vst3sdk")
 set (VST3_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst3sdk")
 set (DMDA_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libDMDA")
 set (ARA_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARA_SDK")
+set (ARA_EXTENSION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARAExtension")
 
 # ============================
 # Options
@@ -204,7 +205,7 @@ if (JucePlugin_Build_LV2)
 endif (JucePlugin_Build_LV2)
 if (JucePlugin_Enable_ARA)
 	if (DEFINED ARA_SDK_PATH)
-		set (JUCE_ARA_INC_PATH ${ARA_SDK_PATH})
+		set (JUCE_ARA_INC_PATH ${ARA_SDK_PATH} ${ARA_EXTENSION_PATH})
 	else (DEFINED ARA_SDK_PATH)
 		message (SEND_ERROR "ARA SDK notfound!")
 	endif (DEFINED ARA_SDK_PATH)
