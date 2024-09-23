@@ -10,9 +10,6 @@
 [submodule "vst3sdk/public.sdk"]
 	path = vst3sdk/public.sdk
 	url = ../../steinbergmedia/vst3_public_sdk.git
-[submodule "libDMDA"]
-	path = libDMDA
-	url = ../../Do-sth-sharp/libDMDA.git
 [submodule "ARA_SDK"]
 	path = ARA_SDK
 	url = https://github.com/Celemony/ARA_SDK.git

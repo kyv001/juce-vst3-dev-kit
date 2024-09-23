@@ -24,7 +24,6 @@ set (JUCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/JUCE")
 set (JUCE_HEADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/JuceLibraryCode")
 set (VST2_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst2-sdk-for-vst3sdk")
 set (VST3_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vst3sdk")
-set (DMDA_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libDMDA")
 set (ARA_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARA_SDK")
 set (ARA_EXTENSION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARAExtension")
 
@@ -221,12 +220,6 @@ if (JucePlugin_Enable_ARA)
 	endif (JucePlugin_Enable_ARA)
 endif (JucePlugin_Enable_ARA)
 
-if (DMDA_ENABLED)
-	set (DMDA_INC_PATH ${DMDA_PATH})
-	set (DMDA_SRC ${DMDA_PATH}/DMDA.cpp)
-	set (DMDA_DEF "DMDA_PLUGIN=1")
-endif (DMDA_ENABLED)
-
 set (JUCE_PUBLIC_INC_PATH
 	${JUCE_HEADER_PATH}
 	${JUCE_INC_PATH}
@@ -235,7 +228,6 @@ set (JUCE_PUBLIC_INC_PATH
 	${JUCE_VST_INC_PATH}
 	${JUCE_VST3_INC_PATH}
 	${JUCE_LV2_INC_PATH}
-	${DMDA_INC_PATH}
 )
 set (JUCE_PRIVATE_INC_PATH
 	${JUCE_INC_LIST}
@@ -279,7 +271,7 @@ set (JUCE_VST3_SRC
 set (JUCE_SRC
 	${JUCE_AUDIO_SRC} ${JUCE_CORE_SRC} ${JUCE_DSP_SRC} ${JUCE_VST3_SRC}
 	"${JUCE_HEADER_PATH}/JuceHeader.h")
-add_library (juce STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX} ${DMDA_SRC})
+add_library (juce STATIC ${JUCE_SRC} ${JUCE_LV2_SRC_FIX} ${JUCE_ARA_SRC_FIX})
 set_source_files_properties ("${JUCE_HEADER_PATH}/JuceHeader.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 
 foreach (ITEM ${JUCE_PUBLIC_INC_PATH})
@@ -393,7 +385,7 @@ elseif (APPLE)
 	target_compile_definitions (juce PUBLIC ${JUCE_OSX_DEF})
 endif ()
 
-target_compile_definitions (juce PUBLIC ${JUCE_MODULE_DEF} ${JUCE_PLUGIN_DEF} ${DMDA_DEF})
+target_compile_definitions (juce PUBLIC ${JUCE_MODULE_DEF} ${JUCE_PLUGIN_DEF})
 
 if (GNU OR MINGW)
 	target_compile_definitions (juce PUBLIC "JUCE_USE_DIRECTWRITE=0")
