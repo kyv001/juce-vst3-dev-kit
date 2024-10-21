@@ -30,8 +30,8 @@ set (ARA_EXTENSION_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ARAExtension")
 # ============================
 # Options
 # ============================
-set (JUCE_DISPLAY_SPLASH_SCREEN OFF)
-set (JUCE_USE_DARK_SPLASH_SCREEN ON)
+#set (JUCE_DISPLAY_SPLASH_SCREEN OFF)
+#set (JUCE_USE_DARK_SPLASH_SCREEN ON)
 set (JucePlugin_Build_VST OFF)
 set (JucePlugin_Build_VST3 ON)
 set (JucePlugin_Build_AU OFF)
@@ -56,12 +56,12 @@ set (JUCE_USE_LAME_AUDIO_FORMAT OFF)
 # ============================
 # Default Options
 # ============================
-if (NOT DEFINED JUCE_DISPLAY_SPLASH_SCREEN)
-	set (JUCE_DISPLAY_SPLASH_SCREEN OFF)
-endif (NOT DEFINED JUCE_DISPLAY_SPLASH_SCREEN)
-if (NOT DEFINED JUCE_USE_DARK_SPLASH_SCREEN)
-	set (JUCE_USE_DARK_SPLASH_SCREEN ON)
-endif (NOT DEFINED JUCE_USE_DARK_SPLASH_SCREEN)
+#if (NOT DEFINED JUCE_DISPLAY_SPLASH_SCREEN)
+#	set (JUCE_DISPLAY_SPLASH_SCREEN OFF)
+#endif (NOT DEFINED JUCE_DISPLAY_SPLASH_SCREEN)
+#if (NOT DEFINED JUCE_USE_DARK_SPLASH_SCREEN)
+#	set (JUCE_USE_DARK_SPLASH_SCREEN ON)
+#endif (NOT DEFINED JUCE_USE_DARK_SPLASH_SCREEN)
 if (NOT DEFINED JucePlugin_Build_VST)
 	set (JucePlugin_Build_VST OFF)
 endif (NOT DEFINED JucePlugin_Build_VST)
@@ -245,21 +245,22 @@ set (JUCE_AUDIO_SRC
 )
 set (JUCE_CORE_SRC
 		"${JUCE_HEADER_PATH}/include_juce_core.cpp"
-		#"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_core_CompilationTime.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_cryptography.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_gui_basics.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_gui_extra.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_events.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_data_structures.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_graphics.cpp"
-		#"${JUCE_HEADER_PATH}/include_juce_graphics_Harfbuzz.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_graphics_Harfbuzz.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_graphics_Sheenbidi.c"
 		"${JUCE_HEADER_PATH}/include_juce_osc.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_box2d.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_opengl.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_analytics.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_product_unlocking.cpp"
 		"${JUCE_HEADER_PATH}/include_juce_video.cpp"
-		#"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
+		"${JUCE_HEADER_PATH}/include_juce_animation.cpp"
 )
 set (JUCE_DSP_SRC
 		"${JUCE_HEADER_PATH}/include_juce_dsp.cpp"
@@ -295,8 +296,8 @@ set (JUCE_WIN_DEF "")
 set (JUCE_OSX_DEF "")
 
 set (JUCE_MODULE_DEF 
-	"JUCE_DISPLAY_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_DISPLAY_SPLASH_SCREEN}>,1,0>"
-	"JUCE_USE_DARK_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_USE_DARK_SPLASH_SCREEN}>,1,0>"
+	#"JUCE_DISPLAY_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_DISPLAY_SPLASH_SCREEN}>,1,0>"
+	#"JUCE_USE_DARK_SPLASH_SCREEN=$<IF:$<BOOL:${JUCE_USE_DARK_SPLASH_SCREEN}>,1,0>"
 	"JUCE_MODULE_AVAILABLE_juce_analytics=1"
 	"JUCE_MODULE_AVAILABLE_juce_audio_basics=1"
 	"JUCE_MODULE_AVAILABLE_juce_audio_devices=1"
