@@ -405,11 +405,13 @@ endif (JUCE_DISABLE_LEAK_DETECTOR)
 if (NOT MSVC)
 	target_compile_options (juce PRIVATE
 			-pthread
-			-fPIC
 			-fvisibility=hidden
 			-fvisibility-inlines-hidden
 			"-Wa,-mbig-obj"
 	)
+	if (NOT (("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang") AND WIN32))
+		target_compile_options (${TARGET} PRIVATE -fPIC)
+	endif ()
 	target_link_options (juce PRIVATE
 			-shared
 			-fvisibility=hidden
@@ -419,7 +421,6 @@ if (NOT MSVC)
 	if (WIN32)
 		target_link_libraries (juce PRIVATE
 			-m64
-			-s
 			-lcomctl32
 			-lwinmm
 			-lwsock32
@@ -433,6 +434,9 @@ if (NOT MSVC)
 			-lopengl32
 			-ldxgi
 		)
+		if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
+			target_link_libraries (${TARGET} PRIVATE -s)
+		endif ()
 	elseif (UNIX AND NOT APPLE)
 		target_link_libraries (juce PRIVATE
 			${RT}
