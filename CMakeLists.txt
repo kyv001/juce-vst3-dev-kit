@@ -410,7 +410,7 @@ if (NOT MSVC)
 			"-Wa,-mbig-obj"
 	)
 	if (NOT (("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang") AND WIN32))
-		target_compile_options (${TARGET} PRIVATE -fPIC)
+		target_compile_options (juce PRIVATE -fPIC)
 	endif ()
 	target_link_options (juce PRIVATE
 			-shared
@@ -435,7 +435,7 @@ if (NOT MSVC)
 			-ldxgi
 		)
 		if (NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
-			target_link_libraries (${TARGET} PRIVATE -s)
+			target_link_libraries (juce PRIVATE -s)
 		endif ()
 	elseif (UNIX AND NOT APPLE)
 		target_link_libraries (juce PRIVATE
