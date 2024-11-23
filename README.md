@@ -9,7 +9,6 @@ git submodule add https://github.com/Do-sth-sharp/juce-vst3-dev-kit.git
 
 2. Set plugin information variables in your CMakeLists.txt  
 ```cmake
-set (DMDA_ENABLED ON)#As you need
 set (JucePlugin_Name "Your Plugin Name")
 set (JucePlugin_Desc "Your Plugin Description")
 set (JucePlugin_Manufacturer "Manufacturer Name")
