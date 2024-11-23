@@ -39,5 +39,5 @@ add_subdirectory (juce-vst3-dev-kit)
 
 4. Link libJUCE to your target.  
 ```cmake
-target_link_libraries (targetName PRIVATE libJUCE ...)
+target_link_libraries (targetName PRIVATE juce ...)
 ```
